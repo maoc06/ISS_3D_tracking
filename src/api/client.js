@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://api.open-notify.org/',
+  baseURL: '',
   headers: { Accept: 'application/json' },
 });
 
