@@ -18,17 +18,23 @@ const Template = () => {
   const mountRef = useRef(null);
   const loading = useLoading();
 
-  const [location, setLocation] = useState({ latitude: 0.0, longitude: 0.0 });
+  const [issInfo, setIssInfo] = useState({
+    latitude: 0.0,
+    longitude: 0.0,
+    altitude: 0.0,
+    velocity: 0.0,
+  });
   const getIssLocationNow = useApi(issLocation.getIssLocationNow);
 
   const getIssLocation = async () => {
     const issLocation = await getIssLocationNow.request();
-    const coordinates = issLocation.data.iss_position;
-    setLocation(coordinates);
+    const { altitude, latitude, longitude, velocity } = issLocation.data;
+
+    setIssInfo({ altitude, latitude, longitude, velocity });
 
     const pos = calcPosFromLatLonRad({
-      lat: coordinates.latitude,
-      lon: coordinates.longitude,
+      lat: latitude,
+      lon: longitude,
       radius: 1,
     });
 
@@ -92,7 +98,7 @@ const Template = () => {
       './models/earth/earthDraco.gltf',
       (gltf) => {
         gltf.scene.scale.set(0.02, 0.02, 0.02);
-        gltf.scene.rotateY(-1.55);
+        gltf.scene.rotateY(-4.7);
         earth.add(gltf.scene);
         scene.add(earth);
         loading.navigate(false);
@@ -157,7 +163,25 @@ const Template = () => {
           <p>
             <strong>Current Location:</strong>
           </p>
-          <span>{`${location.latitude}, ${location.longitude}`}</span>
+          <span>{`${issInfo.latitude.toFixed(4)}, ${issInfo.longitude.toFixed(
+            4
+          )}`}</span>
+
+          <br />
+          <br />
+
+          <p>
+            <strong>Current Altitude:</strong>
+          </p>
+          <span>{`${issInfo.altitude.toFixed(4)} Km`}</span>
+
+          <br />
+          <br />
+
+          <p>
+            <strong>Current Velocity:</strong>
+          </p>
+          <span>{`${issInfo.velocity.toFixed(4)} Km/h`}</span>
         </section>
       )}
     </>

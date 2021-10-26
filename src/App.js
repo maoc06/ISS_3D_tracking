@@ -1,4 +1,4 @@
-import { Template, Loading, Annotation } from './components';
+import { Template, Loading, Annotation, Credits } from './components';
 import { useLoading } from './lib/loading';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Loading visible={loading.loading} />
       <Template />
       {!loading.loading && <Annotation />}
+      <Credits />
     </>
   );
 }

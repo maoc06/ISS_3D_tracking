@@ -1,26 +1,26 @@
-import useApi from '../../hooks/useApi';
-import astros from '../../api/astros';
-import { useCallback, useEffect, useState } from 'react';
+// import useApi from '../../hooks/useApi';
+// import astros from '../../api/astros';
+// import { useCallback, useEffect, useState } from 'react';
 
 const Annotation = () => {
-  const getAstros = useApi(astros.getAstros);
-  const [issAstros, setIssAstros] = useState([]);
+  // const getAstros = useApi(astros.getAstros);
+  // const [issAstros, setIssAstros] = useState([]);
 
-  const getIssAstros = useCallback(async () => {
-    const astros = await getAstros.request();
-    const people = astros.data.people;
+  // const getIssAstros = useCallback(async () => {
+  //   const astros = await getAstros.request();
+  //   const people = astros.data.people;
 
-    const issAstros = people.filter((astro) => astro.craft === 'ISS');
-    setIssAstros(issAstros);
-  }, [getAstros]);
+  //   const issAstros = people.filter((astro) => astro.craft === 'ISS');
+  //   setIssAstros(issAstros);
+  // }, [getAstros]);
 
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) getIssAstros();
-    return () => {
-      isMounted = false;
-    };
-  }, [getIssAstros]);
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   if (isMounted) getIssAstros();
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [getIssAstros]);
 
   return (
     <div
@@ -54,12 +54,12 @@ const Annotation = () => {
         The station travels on <strong>average at 27,500 km/h</strong>, making a
         full circle around the earth in about 93 minutes{' '}
         <strong>completing 15.5 orbits each day</strong>.
+        {/* <br />
         <br />
-        <br />
-        At this moment, it is manned by:
+        At this moment, it is manned by: */}
       </p>
 
-      <ul style={{ listStyleType: 'none' }}>
+      {/* <ul style={{ listStyleType: 'none' }}>
         {issAstros.map((astro) => {
           return (
             <li key={astro.name} style={{ marginLeft: 12 }}>
@@ -67,7 +67,7 @@ const Annotation = () => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
     </div>
   );
 };
